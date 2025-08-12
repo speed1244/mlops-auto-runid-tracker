@@ -1,12 +1,15 @@
 # mlops-auto-runid-tracker
 
-
 Minimal demo:
-- Train a simple sklearn model (Iris) and log to MLflow
-- Save model to `./model/model.pkl`
-- Serve with FastAPI at `/predict`
+- Model Training: Trains a simple Iris model and logs the process with MLflow.
 
-## Quickstart (local)
+- Model Saving: The trained model is saved as a .pkl file for deployment.
+
+- API Service: A FastAPI server provides a /predict endpoint for the model.
+
+- MLflow UI: The MLflow interface helps you visualize and manage all experiment runs.
+
+## Quickstart
 
 1. Create venv & install:
 ```bash
@@ -44,3 +47,16 @@ default port is 5000
 ```bash
 http://127.0.0.1:5000/#/experiments
 ```
+
+## To-Do List
+1. Containerize Training (train.py): Create a Dockerfile to package the training script for a reproducible environment.
+
+3. Enhance API Health Check: Add a /health endpoint to verify if the model is loaded correctly.
+
+5. Parameterize Training Script: Use argparse to allow command-line parameters for training runs.
+
+7. Add API Unit Tests: Write pytest unit tests for the /predict endpoint to ensure reliability.
+
+9. Implement API Versioning: Add versioning (e.g., /v1/predict) to the API endpoints.
+
+11. Deploy with Kubernetes: Use Kubernetes to deploy and manage the FastAPI service for scalability and high availability.
