@@ -11,21 +11,19 @@ Minimal demo:
 
 ## Quickstart
 
-1. Create venv & install:
+1. Build the Training Image
 ```bash
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
+docker build -t [docker_image_name] -f Dockerfile.train .
 ```
 
-2. Train model:
+2. Run the Training Container
 ```bash
-python train.py
+docker run --rm -v $(pwd)/model:/app/model [docker_image_name]
 ```
 
 3. Build docker image and run the API server:
 ```bash
-docker build -t [docker_image_name] .
+docker build -t [docker_image_name] -f Dockerfile.fastapi .
 docker run -p 8000:8000 [docker_image_name]
 ```
 
@@ -49,7 +47,7 @@ http://127.0.0.1:5000/#/experiments
 ```
 
 ## To-Do List
-1. Containerize Training (train.py): Create a Dockerfile to package the training script for a reproducible environment.
+1. ~~Containerize Training (train.py): Create a Dockerfile to package the training script for a reproducible environment.~~
 
 3. Enhance API Health Check: Add a /health endpoint to verify if the model is loaded correctly.
 

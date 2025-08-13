@@ -27,11 +27,15 @@ model.fit(X_train, y_train)
 preds = model.predict(X_test)
 acc = accuracy_score(y_test, preds)
 
+# --- FIX: Get a sample input for the model signature ---
+# Take the first row of the test data as an example input.
+input_example = X_test[:1]
+
 # mlflow log + save model to local file
 with mlflow.start_run() as run:
     mlflow.log_param("model_type", "LogisticRegression")
     mlflow.log_metric("accuracy", float(acc))
-    mlflow.sklearn.log_model(model, "model")   # saved to mlruns/...
+    mlflow.sklearn.log_model(model, name="model", input_example=input_example)
     # also save a simple pickle for API to load easily
     joblib.dump(model, MODEL_FILE)
 
